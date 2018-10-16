@@ -1,7 +1,62 @@
 <template>
     <div>
-        <h4>我是个人中心页</h4>
-
+        <div class="header clearfix">我的党建</div>
+        <!-- 头部登录部分 -->
+        <div>
+            <div v-if=true class="user">
+                <div class="user-img">
+                    <img src="../../public/imgs/person/我的党建_iPhone_assets/头像.png" alt="">
+                </div>
+                <div class="user-login">
+                    <router-link class="user-link" to="/login">你还没有登录，请登录</router-link>
+                </div>
+            </div>
+            <div v-else class="user">
+                <div class="user-img">
+                    <img src="../../public/imgs/person/我的党建_iPhone_assets/头像2.jpg" alt="">
+                </div>
+                <div class="user-login">
+                    <router-link class="user-link" to="/login">test1</router-link>
+                </div>
+            </div>
+        </div>
+        <!-- 中间部分 -->
+        <div class="item">
+            <router-link to="/personDetail">
+                <mt-cell style="height:54px;" title="个人信息">
+                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/个人信息.png" width="32" height="32">
+                </mt-cell>
+            </router-link>
+        </div>
+        <div class="item">
+            <router-link to="">
+                <mt-cell style="height:54px;" title="个人量化分">
+                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/量化积分icon.png" width="32" height="32">
+                </mt-cell>
+            </router-link>
+        </div>
+        <div class="item">
+            <router-link to="/upPassword">
+                <mt-cell style="height:54px;" title="修改密码">
+                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/修改密码icon.png" width="32" height="32">
+                </mt-cell>
+            </router-link>
+        </div>
+        <div class="item">
+            <router-link to="">
+                <mt-cell style="height:54px;" title="党费缴纳">
+                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/党费缴纳.png" width="32" height="32">
+                </mt-cell>
+            </router-link>
+        </div>
+        <div v-if=false style="padding:10px; margin-top:40px;">
+            <mt-button type="danger" size="large">退出登录</mt-button>
+        </div>
+        <!-- 底部导航部分 -->
         <div class="footer">
             <div class="tabs">
                 <div class="tab-item" style="border-top: 2px solid #fff;">
@@ -24,7 +79,7 @@
                     <router-link class="link" to="/person">
                         <div>
                             <img src="../../public/imgs/index/drawable-xhdpi/会员_red.png" alt="">
-                            <div style="color:#ef473a;">我的党建</div>
+                            <div style="color:#ef473a; margin-top:-1px;">我的党建</div>
                         </div>
                     </router-link>
                 </div>
@@ -40,6 +95,41 @@
 </script>
 
 <style scoped lang="less">
+.header{
+    width: 7.5rem;
+    height: 44px;
+    background: #c50206;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 44px;
+}
+.user{
+    background: #c50206;
+    height: 140.63px;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    // box-sizing: content-box;
+    .user-img img{
+        margin-top: 36.5px;
+        width: 1.25rem;
+        height: 62.5px;
+        border-radius: 50%;
+    }
+    .user-login{
+        line-height: 1.5;
+    }
+    .user-link{
+        color: #fff;
+        text-decoration: none;
+    }
+}
+.item{
+    color: #666;
+}
+
 .footer{
     position: fixed;
     left: 0;
@@ -67,9 +157,6 @@
             }
             .link{
                 text-decoration: none;
-            }
-            .link:active{
-                background: none;
             }
         }
     }

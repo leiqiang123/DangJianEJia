@@ -3,27 +3,34 @@
         <div>
             <div class="header clearfix">
                 <img class="header-img" src="../../public/imgs/index/drawable-hdpi/logo.png" alt="">
-                <a href="">登录</a>
+                <router-link class="a" to="/login">登录</router-link>
             </div>
-            <mt-swipe style="height:187.5px;" :auto="3000">
+            <mt-swipe style="height:187.5px; margin-top: 44px;" :auto="3000">
                 <mt-swipe-item v-for="(item,index) in rowsData" :key="index">
                     <img class="carousel-img" :src="item.imgUrl" alt="">
+                    <div class="carousel-bottom">{{item.title}}</div>
                 </mt-swipe-item>
             </mt-swipe>
             <div class="menu">
                 <div class="menu-row">
-                    <div class="menu-cell">
-                        <img src="../../public/imgs/index/drawable-hdpi/icon_01@2x.png" alt="">
-                        <div>信工新闻眼</div>
-                    </div>
-                    <div class="menu-cell">
-                        <img src="../../public/imgs/index/drawable-hdpi/icon_03@2x.png" alt="">
+                    <router-link to="/newseye">
+                        <div class="menu-cell">
+                            <img src="../../public/imgs/index/drawable-hdpi/icon_01@2x.png" alt="">
+                            <div>信工新闻眼</div>
+                        </div>
+                    </router-link>
+                    <router-link to="">
+                        <div class="menu-cell">
+                            <img src="../../public/imgs/index/drawable-hdpi/icon_03@2x.png" alt="">
                         <div>掌上组织生活</div>
                     </div>
-                    <div class="menu-cell">
-                        <img src="../../public/imgs/index/drawable-hdpi/icon_05@2x.png" alt="">
-                        <div>党员云互动</div>
-                    </div>
+                    </router-link>
+                    <router-link to="/interaction">
+                        <div class="menu-cell">
+                            <img src="../../public/imgs/index/drawable-hdpi/icon_05@2x.png" alt="">
+                            <div>党员云互动</div>
+                        </div>
+                    </router-link>
                 </div>
                 <div class="menu-row">
                     <div class="menu-cell">
@@ -75,7 +82,7 @@
                         <router-link class="link" to="/person">
                             <div>
                                 <img src="../../public/imgs/index/drawable-xhdpi/会员_grey.png" alt="">
-                                <div>我的党建</div>
+                                <div style="margin-top:-1px;">我的党建</div>
                             </div>
                         </router-link>
                     </div>
@@ -86,6 +93,7 @@
 </template>
 
 <script>
+
     export default {
         data () {
             return {
@@ -108,6 +116,9 @@
 
 <style scoped lang="less">
 .header{
+    position: fixed;
+    top: 0;
+    z-index: 998;
     width: 7.5rem;
     height: 44px;
     background: #c50206;
@@ -117,7 +128,7 @@
         height: 31.27px;
         float: left;
     }
-    a{
+    .a{
         font-size: 0.34rem;
         font-weight: 300;
         float: right;
@@ -130,7 +141,20 @@
 .carousel-img{
     width: 7.5rem;
     height: 187.5px;
+    position: relative;
 }
+.carousel-bottom{
+    position: absolute;
+    z-index: 11;
+    background: rgba(0,0,0,.5);
+    padding: 4px;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 14px;
+}
+
 .menu{
     background-image: url(../../public/imgs/index/drawable-hdpi/bt_bg@2x.png);
     height: 197px;

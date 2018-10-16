@@ -3,10 +3,10 @@
         <div class="header clearfix">
             通知早知道
         </div>
+        
+        <mt-spinner v-if="isLoading" class="loading" type="snake"></mt-spinner>
 
-        <!-- <div class="notice-title">关于我院党总支近期将举办党的十九大知识竞赛的通知</div> -->
-
-        <div>
+        <div v-else>
             <div class="row" v-for="(item, index) in noticeData" :key="index">
                 <div class="left-img">
                     <img src="../../public/imgs/notice/drawable-hdpi/iconfont_gonggaotongzhi.png" alt="">
@@ -17,26 +17,12 @@
                 </div>
             </div>
         </div>
-        <!-- <ul>
-            <li v-for="(item, index) in noticeData" :key="index">
-                <div class="row">
-                    <div class="left-img">
-                        <img src="../../public/imgs/notice/drawable-hdpi/iconfont_gonggaotongzhi.png" alt="">
-                    </div>
-                    <div class="col">
-                        <div class="notice-title">{{item.title}}</div>
-                        <div class="notice-time">{{item.currentTime}}</div>
-                    </div>
-                </div>
-            </li>
-        </ul> -->
+        
         <div class="loading-content">
             <div class="content-span">
                 <span>没有数据了</span>
             </div>
         </div>
-        
-        
 
         <div class="footer">
             <div class="tabs">
@@ -60,7 +46,7 @@
                     <router-link class="link" to="/person">
                         <div>
                             <img src="../../public/imgs/index/drawable-xhdpi/会员_grey.png" alt="">
-                            <div>我的党建</div>
+                            <div style="margin-top:-1px;">我的党建</div>
                         </div>
                     </router-link>
                 </div>
@@ -73,14 +59,17 @@
     export default {
         data () {
             return {
-                noticeData:[]
+                noticeData:[],
+                isLoading:false
             }
         },
         methods: {
             getData () {
+                this.isLoading = true
                 this.$axios.get('/hhdj/news/newsList.do?page=1&rows=10&type=2').then(res => {
                     console.log(res.data.rows)
                     this.noticeData = res.data.rows
+                    this.isLoading = false
                     console.log(this.noticeData)
                 })
             }
@@ -134,7 +123,10 @@
         }
     }
 }
-
+.loading{
+    position: fixed;
+    left: 50%;
+}
 .loading-content{
     text-align: center;
     .content-span{
