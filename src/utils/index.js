@@ -1,9 +1,12 @@
 import axios from 'axios'
 
+
 var instance = axios.create({
     baseURL: 'http://211.67.177.56:8080',
     timeout:15000
 });
+
+
 
 const xhr = {
     get(url, data, config) {
@@ -14,7 +17,7 @@ const xhr = {
                 reject(err)
             })
         })
-    }
+    },
 }
 
 export default xhr

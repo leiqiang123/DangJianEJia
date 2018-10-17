@@ -6,8 +6,11 @@ import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import $axios from './utils/index'
+import axios from './utilss/index'
+import store from './store'
 
 Vue.prototype.$axios = $axios
+Vue.prototype.axios = axios
 
 Vue.use(MintUI)
 Vue.config.productionTip = false
@@ -16,6 +19,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

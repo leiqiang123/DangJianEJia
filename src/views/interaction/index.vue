@@ -1,6 +1,7 @@
 <template>
     <div>
         <Header>党员云互动</Header>
+        <div class="h44"></div>
         <div style="background-color: #efeff4;">
             <ul>
                 <li class="item">
@@ -11,9 +12,9 @@
                         <div class="top-center">
                             <div class="nickname">刘溢思</div>
                             <div class="time">
-                                <i></i>
+                                <i class="iconfont">&#xe62c;</i>
                                 <span>2018-07-01 08:55:50</span>
-                                <i></i>
+                                <i class="iconfont">&#xe62d;</i>
                                 <span>公开</span>
                             </div>
                         </div>
@@ -22,7 +23,7 @@
                     <div class="middle-content">信仰，节日快乐!</div>
                     <div>
                         <span class="response">
-                            <i></i>
+                            <i class="iconfont">&#xe62b;</i>
                             <span>回复</span>
                         </span>
                     </div>

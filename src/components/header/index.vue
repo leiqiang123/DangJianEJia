@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="head">
         <div class="header clearfix">
             <slot></slot>
         </div>
@@ -18,6 +18,11 @@
 </script>
 
 <style scoped>
+.head{
+    position: fixed;
+    top: 0;
+    z-index: 998;
+}
 .header{
     width: 7.5rem;
     height: 44px;

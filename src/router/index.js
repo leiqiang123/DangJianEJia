@@ -58,6 +58,21 @@ const router = new Router({
       path:'/interaction',
       name:'interaction',
       component: () => import('../views/interaction')
+    },
+    {
+      path:'/register',
+      name:'register',
+      component: () => import('../views/register')
+    },
+    {
+      path:'/life',
+      name:'life',
+      component: () => import('../views/life')
+    },
+    {
+      path:'/auditStatus',
+      name:'auditStatus',
+      component: () => import('../views/auditStatus')
     }
   ]
 })

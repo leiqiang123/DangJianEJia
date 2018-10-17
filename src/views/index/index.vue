@@ -3,7 +3,7 @@
         <div>
             <div class="header clearfix">
                 <img class="header-img" src="../../public/imgs/index/drawable-hdpi/logo.png" alt="">
-                <router-link class="a" to="/login">登录</router-link>
+                <router-link v-if="isShow" class="a" to="/login">登录</router-link>
             </div>
             <mt-swipe style="height:187.5px; margin-top: 44px;" :auto="3000">
                 <mt-swipe-item v-for="(item,index) in rowsData" :key="index">
@@ -19,7 +19,7 @@
                             <div>信工新闻眼</div>
                         </div>
                     </router-link>
-                    <router-link to="">
+                    <router-link to="/life">
                         <div class="menu-cell">
                             <img src="../../public/imgs/index/drawable-hdpi/icon_03@2x.png" alt="">
                         <div>掌上组织生活</div>
@@ -97,18 +97,22 @@
     export default {
         data () {
             return {
-                rowsData:[]
+                rowsData:[],
+                isShow:true
             }
         },
         methods: {
             getCarouselData () {
                 this.$axios.get('/hhdj/carousel/carouselList.do').then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     this.rowsData = res.data.rows
                 })
             }
         },
         created () {
+            if(this.$store.state.userData.username){
+                this.isShow = false
+            }
             this.getCarouselData()
         }        
     }

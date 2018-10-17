@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header>信工新闻眼</Header>
-
+        <div class="h44"></div>
         <div>
             <div class="news-item" v-for="(item, index) in newsListData" :key="index">
                 <router-link :to="{path:'/newsDetail', query:{id:item.newsId}}">
@@ -45,7 +45,7 @@
         methods: {
             getnewsData () {
                 this.$axios.get('/hhdj/news/newsList.do',this.newsSettings).then(res => {
-                    console.log(res.data.rows)
+                    // console.log(res.data.rows)
                     res.data.rows.map(item => {
                         if(item.title.length > 30){
                             item.title = item.title.slice(0,31) + '...'

@@ -3,7 +3,7 @@
         <div class="header clearfix">我的党建</div>
         <!-- 头部登录部分 -->
         <div>
-            <div v-if=true class="user">
+            <div v-if="isShow" class="user">
                 <div class="user-img">
                     <img src="../../public/imgs/person/我的党建_iPhone_assets/头像.png" alt="">
                 </div>
@@ -13,10 +13,10 @@
             </div>
             <div v-else class="user">
                 <div class="user-img">
-                    <img src="../../public/imgs/person/我的党建_iPhone_assets/头像2.jpg" alt="">
+                    <img :src="userData.avatar" alt="">
                 </div>
                 <div class="user-login">
-                    <router-link class="user-link" to="/login">test1</router-link>
+                    <router-link class="user-link" to="">{{userData.username}}</router-link>
                 </div>
             </div>
         </div>
@@ -53,9 +53,10 @@
                 </mt-cell>
             </router-link>
         </div>
-        <div v-if=false style="padding:10px; margin-top:40px;">
-            <mt-button type="danger" size="large">退出登录</mt-button>
+        <div v-if="!isShow" style="padding:10px; margin-top:40px;">
+            <mt-button type="danger" size="large" @click="handleLogout">退出登录</mt-button>
         </div>
+        
         <!-- 底部导航部分 -->
         <div class="footer">
             <div class="tabs">
@@ -89,8 +90,48 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
-        
+        data () {
+            return {
+                isShow:true,
+            }
+        },
+        methods: {
+            handleLogout () {
+                this.axios.get('/logout').then(res => {
+                    console.log(res)
+                    let userData = {
+                        username: '',
+                        idNumber: '',
+                        avatar: ''
+                    }
+                    this.isShow = true
+                    if(res.data.code == 200){
+                        this.$toast('退出登录成功')
+                        setTimeout(() => {
+                            this.$store.commit('CHANGE_USERDATA',userData)
+                            this.$router.push('/person')
+                        },1000)
+                    }else{
+                        setTimeout(() => {
+                            this.$toast('登录过期，请先登录')
+                            this.$store.commit('CHANGE_USERDATA',userData)
+                        },1000)
+                    }
+                })
+            }
+        },
+        created () {
+            console.log(this.$store.state.userData.username)
+            if(this.$store.state.userData.username){
+                this.isShow = false
+            }
+        },
+        // computed : {...mapState(['userData'])}
+        computed: mapState({
+            userData: state => state.userData
+        })
     }
 </script>
 

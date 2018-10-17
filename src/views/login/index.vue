@@ -6,11 +6,15 @@
                 <img src="../../public/imgs/login/logo.png" alt="">
             </div>
         </div>
-        <form action="" class="login-form">
-            <input class="form-input" type="text" placeholder="身份证号">
-            <input class="form-input" type="password" placeholder="密码">
-            <mt-button style="width:100%; font-size:14px;" type="danger">登录</mt-button>
+        <form class="login-form">
+            <input class="form-input" type="text" v-model="userData.idNumber" placeholder="身份证号">
+            <input class="form-input" type="password" v-model="userData.password" placeholder="密码">
+            <mt-button style="width:100%; font-size:14px;" type="danger" @click="handleLogin">登录</mt-button>
         </form>
+        <div class="register">
+            <span>还没有账号？</span>
+            <router-link style="color:yellow" to="/register">点我注册</router-link>
+        </div>
     </div>
 </template>
 
@@ -20,9 +24,36 @@
         components:{
             Header
         },
+        data () {
+            return {
+                userData:{
+                    idNumber: '',
+                    password: '',
+                },
+            }
+        },
         methods: {
-            backPage () {
-                history.go(-1)
+            handleLogin () {
+                this.axios.post('/login',this.userData).then(res => {
+                    if(this.userData.idNumber){
+                        if(this.userData.password && this.userData.password.length >= 5){
+                            if(res.data.code == 200){
+                                // console.log(res.data.userData)
+                                this.$store.commit('CHANGE_USERDATA',res.data.userData)
+                                this.$toast('登录成功')
+                                setTimeout(() => {
+                                    this.$router.push('/person')
+                                },1500)
+                            }else{
+                                this.$toast(res.data.msg)
+                            }
+                        }else{
+                            this.$toast('请正确输入密码')
+                        }
+                    }else{
+                        this.$toast('请输入身份证号')
+                    }
+                })
             }
         }
     }
@@ -58,4 +89,12 @@
     color:#fff;
     font-size:12px;
 }
+.register{
+    padding-top: 10px;
+    width: 6rem;
+    font-size: 14px;
+    margin: 0 auto;
+    color: #fff;
+}
+
 </style>

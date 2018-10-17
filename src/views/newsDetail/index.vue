@@ -1,6 +1,7 @@
 <template>
     <div>
         <Header>信工新闻眼</Header>
+        <div class="h44"></div>
         <div style="padding:10px;">
             <h3 class="news-title">{{newsDetail.title}}</h3>
             <div id="content">

@@ -1,6 +1,7 @@
 <template>
     <div>
         <Header>个人信息</Header>
+        <div class="h44"></div>        
         <div>
             <div class="item">
                 <span class="icon-left">头像</span>
@@ -85,7 +86,7 @@
     color: #444;
     position: relative;
     z-index: 2;
-    display: block;
+    // display: block;
     margin: -1px;
     padding: 16px;
     font-size: 16px;
