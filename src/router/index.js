@@ -73,6 +73,21 @@ const router = new Router({
       path:'/auditStatus',
       name:'auditStatus',
       component: () => import('../views/auditStatus')
+    },
+    {
+      path:'/score',
+      name:'score',
+      component: () => import('../views/score')
+    },
+    {
+      path:'/scoreDetail',
+      name:'scoreDetail',
+      component: () => import('../views/scoreDetail')
+    },
+    {
+      path:'/updatePersonDetail',
+      name:'updatePersonDetail',
+      component: () => import('../views/updatePersonDetail')
     }
   ]
 })

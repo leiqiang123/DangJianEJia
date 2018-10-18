@@ -1,7 +1,8 @@
 <template>
     <div>
         <Header>个人信息</Header>
-        <div class="h44"></div>        
+        <router-link to="/updatePersonDetail"><div class="edit">编辑</div></router-link>
+        <div class="h44"></div>     
         <div>
             <div class="item">
                 <span class="icon-left">头像</span>
@@ -73,10 +74,31 @@
         components:{
             Header
         },
+        methods: {
+            getPersonInfo () {
+                this.$axios.get('/hhdj/user/userInfo.do').then(res => {
+                    console.log(res)
+                })
+            }
+        },
+        created () {
+            this.getPersonInfo()
+        }
     }
 </script>
 
 <style scoped lang="less">
+.edit{
+    color: #fff;
+    z-index: 998;
+    position: fixed;
+    top: 12px;
+    right: 6px;
+    font-weight: 300;
+    font-size: 17px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
 .item{
     height: 50px;
     padding-right: 54px;

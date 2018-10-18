@@ -7,15 +7,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        userData:{
-            username: '',
-            idNumber: '',
-            avatar: '',
-        }
+        userData:{},
+        token:''
     },
     mutations: {
         'CHANGE_USERDATA'(state,payload) {
             state.userData = payload
+        },
+        'CHANGE_TOKEN'(state,payload) {
+            state.token = payload
         }
     },
     plugins: [

@@ -19,6 +19,7 @@ export default {
 }
 .clearfix:after{
   content: '';
+  display: block;
   clear: both;
   overflow: hidden;
 }

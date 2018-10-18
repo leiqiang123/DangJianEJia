@@ -13,7 +13,7 @@
             </div>
             <div v-else class="user">
                 <div class="user-img">
-                    <img :src="userData.avatar" alt="">
+                    <img :src="userData.header" alt="">
                 </div>
                 <div class="user-login">
                     <router-link class="user-link" to="">{{userData.username}}</router-link>
@@ -21,29 +21,23 @@
             </div>
         </div>
         <!-- 中间部分 -->
-        <div class="item">
-            <router-link to="/personDetail">
-                <mt-cell style="height:54px;" title="个人信息">
-                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
-                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/个人信息.png" width="32" height="32">
-                </mt-cell>
-            </router-link>
+        <div @click="JumpPersonDetail" class="item">
+            <mt-cell style="height:54px;" title="个人信息">
+                <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/个人信息.png" width="32" height="32">
+            </mt-cell>
         </div>
-        <div class="item">
-            <router-link to="">
-                <mt-cell style="height:54px;" title="个人量化分">
-                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
-                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/量化积分icon.png" width="32" height="32">
-                </mt-cell>
-            </router-link>
+        <div @click="JumpScore" class="item">
+            <mt-cell style="height:54px;" title="个人量化分">
+                <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/量化积分icon.png" width="32" height="32">
+            </mt-cell>
         </div>
-        <div class="item">
-            <router-link to="/upPassword">
-                <mt-cell style="height:54px;" title="修改密码">
-                    <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
-                    <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/修改密码icon.png" width="32" height="32">
-                </mt-cell>
-            </router-link>
+        <div @click="JumpUpPassword" class="item">
+            <mt-cell style="height:54px;" title="修改密码">
+                <span><img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/形状-7-拷贝-5.png"></span>
+                <img slot="icon" src="../../public/imgs/person/我的党建_iPhone_assets/修改密码icon.png" width="32" height="32">
+            </mt-cell>
         </div>
         <div class="item">
             <router-link to="">
@@ -120,6 +114,27 @@
                         },1000)
                     }
                 })
+            },
+            JumpPersonDetail () {
+                if(this.$store.state.userData.username){
+                    this.$router.push('/personDetail')
+                }else{
+                    this.$router.push('/login')
+                }
+            },
+            JumpUpPassword () {
+                if(this.$store.state.userData.username){
+                    this.$router.push('/upPassword')
+                }else{
+                    this.$router.push('/login')
+                }
+            },
+            JumpScore () {
+                if(this.$store.state.userData.username){
+                    this.$router.push('/score')
+                }else{
+                    this.$router.push('/login')
+                }
             }
         },
         created () {
