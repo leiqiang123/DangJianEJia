@@ -6,8 +6,7 @@
             <img src="../../public/imgs/切图/timg.jpg" alt="">
         </div>
         <div class="middle-mune">
-            <router-link to=""></router-link>
-            <router-link to="">
+            <router-link :to="{path:'/newseye',query:{typeId:type,title:'政治学习'}}">
                 <div class="item">
                     <img src="../../public/imgs/切图/icon1.png" alt="">
                     <div>政治学习</div>
@@ -27,7 +26,7 @@
                     <div>民主评议</div>
                 </div>
             </router-link>
-            <router-link to="">
+            <router-link to="/findOrgMap">
                 <div class="item">
                     <img src="../../public/imgs/切图/icon5.png" alt="">
                     <div>流动党员找组织</div>
@@ -42,6 +41,11 @@
     export default {
         components:{
             Header
+        },
+        data () {
+            return {
+                type:8
+            }
         },
         methods: {
             handleJumpOne () {

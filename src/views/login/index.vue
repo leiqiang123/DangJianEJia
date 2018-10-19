@@ -56,11 +56,11 @@
                 //     }
                 // })
                 
-                this.$axios.post('/hhdj/user/userLogin.do',this.userData).then(res => {
+                this.$axios.post('/user/userLogin.do',this.userData).then(res => {
                     if(this.userData.id_card){
                         if(this.userData.password && this.userData.password.length >= 5){
                             if(res.data.code == 1){
-                                console.log(res)
+                                // console.log(res)
                                 this.$store.commit('CHANGE_USERDATA',res.data.data)
                                 this.$store.commit('CHANGE_TOKEN',res.data.token)
                                 this.$toast('登录成功')

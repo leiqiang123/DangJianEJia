@@ -93,27 +93,36 @@
         },
         methods: {
             handleLogout () {
-                this.axios.get('/logout').then(res => {
-                    console.log(res)
-                    let userData = {
-                        username: '',
-                        idNumber: '',
-                        avatar: ''
-                    }
-                    this.isShow = true
-                    if(res.data.code == 200){
-                        this.$toast('退出登录成功')
-                        setTimeout(() => {
-                            this.$store.commit('CHANGE_USERDATA',userData)
-                            this.$router.push('/person')
-                        },1000)
-                    }else{
-                        setTimeout(() => {
-                            this.$toast('登录过期，请先登录')
-                            this.$store.commit('CHANGE_USERDATA',userData)
-                        },1000)
-                    }
-                })
+                // this.axios.get('/logout').then(res => {
+                //     console.log(res)
+                //     let userData = {
+                //         username: '',
+                //         idNumber: '',
+                //         avatar: ''
+                //     }
+                //     this.isShow = true
+                //     if(res.data.code == 200){
+                //         this.$toast('退出登录成功')
+                //         setTimeout(() => {
+                //             this.$store.commit('CHANGE_USERDATA',userData)
+                //             this.$router.push('/person')
+                //         },1000)
+                //     }else{
+                //         setTimeout(() => {
+                //             this.$toast('登录过期，请先登录')
+                //             this.$store.commit('CHANGE_USERDATA',userData)
+                //         },1000)
+                //     }
+                // })
+                let userData = {}
+                let token = {}
+                this.isShow = true
+                this.$toast('退出登录成功')
+                setTimeout(() => {
+                    this.$store.commit('CHANGE_USERDATA',userData)
+                    this.$store.commit('CHANGE_TOKEN',userData)
+                    this.$router.push('/login')
+                },1000)
             },
             JumpPersonDetail () {
                 if(this.$store.state.userData.username){
@@ -138,7 +147,7 @@
             }
         },
         created () {
-            console.log(this.$store.state.userData.username)
+            // console.log(this.$store.state.userData.username)
             if(this.$store.state.userData.username){
                 this.isShow = false
             }

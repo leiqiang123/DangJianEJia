@@ -1,77 +1,77 @@
 <template>
     <div>
         <Header>修改个人信息</Header>
-        <div class="edit">保存</div>
+        <div class="edit" @click="handleSave">保存</div>
         <div class="h44"></div>
         <div>
             <form action="">
                 <div class="item">
                     <span class="item-left">头像</span>
-                    <input class="item-right" type="text" v-model="neirong">
+                    <input class="item-right" type="text">
                 </div>
                 <div class="item">
                     <span class="item-left">姓名</span>
-                    <input class="item-right" :disabled="isEdit" type="text" v-model="neirong">
+                    <input class="item-right" :disabled="isEdit" type="text" v-model="userInfo.username">
                 </div>
                 <div class="item">
                     <span class="item-left">身份证</span>
-                    <input class="item-right" disabled type="text" v-model="neirong">
+                    <input class="item-right" disabled type="text" v-model="idCard">
                 </div>
                 <div class="item">
                     <span class="item-left">家庭住址</span>
-                    <input class="item-right" :disabled="isEdit" type="text" v-model="neirong">
+                    <input class="item-right" :disabled="isEdit" type="text" v-model="userInfo.hometown">
                 </div>
                 <div class="item">
                     <span class="item-left">工作地址</span>
-                    <input class="item-right" :disabled="isEdit" type="text" v-model="neirong">
+                    <input class="item-right" :disabled="isEdit" type="text" v-model="userInfo.address">
                 </div>
                 <div class="item">
                     <span class="item-left">民族</span>
-                    <input class="item-right" :disabled="isEdit" type="text" v-model="neirong">
+                    <input class="item-right" :disabled="isEdit" type="text" v-model="userInfo.nation">
                 </div>
                 <div class="item">
                     <span class="item-left">微信号</span>
-                    <input class="item-right" :disabled="isEdit" type="text" v-model="neirong">
+                    <input class="item-right" :disabled="isEdit" type="text" v-model="userInfo.wxNum">
                 </div>
                 <div class="item">
                     <span class="item-left">qq号</span>
-                    <input class="item-right" :disabled="isEdit" type="text" v-model="neirong">
+                    <input class="item-right" :disabled="isEdit" type="text" v-model="userInfo.qqNum">
                 </div>
                 <div class="item">
                     <span class="item-left">性别</span>
                     <!-- <input class="item-right" type="text" v-model="neirong"> -->
                     <span class="item-right">
-                        <input type="radio" checked="checked" name="sex" value="1">男
-                        <input type="radio" name="sex" value="0">女
+                        <input type="radio" :checked="userInfo.sex == 1 ? 'checked' : ''" name="sex" value="1">男
+                        <input type="radio" :checked="userInfo.sex == 0 ? 'checked' : ''" name="sex" value="0">女
                         <!-- <input class="item-radio" type="radio" value="女"> -->
                     </span>
                 </div>
                 <div class="item">
                     <span class="item-left">最高学历</span>
-                    <input class="item-right" type="text" v-model="neirong">
+                    <input class="item-right" type="text" v-model="userInfo.education">
                 </div>
                 <div class="item">
                     <span class="item-left">职称</span>
-                    <input class="item-right" type="text" v-model="neirong">
+                    <input class="item-right" type="text" v-model="userInfo.jobRank">
                 </div>
                 <div class="item">
                     <span class="item-left">薪资水平</span>
-                    <input class="item-right" type="text" v-model="neirong">
+                    <input class="item-right" type="text" v-model="userInfo.salary">
                 </div>
                 <div class="item">
                     <span class="item-left">入党时间</span>
                     <!-- <input class="item-right" type="text" v-model="neirong"> -->
-                    <mt-field class="item-time-select" type="date"></mt-field>
+                    <mt-field class="item-time-select" v-model="userInfo.joinPartyTime" type="date"></mt-field>
                 </div>
                 <div class="item">
                     <span class="item-left">党费最后缴纳时间</span>
                     <!-- <input class="item-right" type="text" v-model="neirong"> -->
-                    <mt-field class="item-time-select" type="date"></mt-field>
+                    <mt-field class="item-time-select" v-model="userInfo.lastPayTime" type="date"></mt-field>
                 </div>
                 <div class="item">
                     <span class="item-left">当前身份</span>
                     <!-- <input class="item-right" type="text" v-model="neirong"> -->
-                    <select class="item-select" name="" id="">
+                    <select class="item-select" v-model="userInfo.partyStatus" name="" id="">
                         <option value="0">党员</option>
                         <option value="1">预备党员</option>
                         <option value="2">积极份子</option>
@@ -90,9 +90,68 @@
         },
         data () {
             return {
-                neirong:'test1',
+                userInfo:{
+                    sex:'',
+                    username: 'test1',
+                    hometown: 'jtzz',
+                    address: 'gzdz',
+                    nation: '汉',
+                    wxNum: '123456',
+                    qqNum: '1111112',
+                    education: '3111111',
+                    jobRank: 'test',
+                    salary: '18000',
+                    joinPartyTime: '1999-01-25',
+                    lastPayTime: '2011-01-01',
+                    partyStatus: '1'
+                },
                 isEdit:false,
+                idCard:0
             }
+        },
+        methods: {
+            getUserInfo () {
+                this.$axios.get('/user/userInfo.do').then(res => {
+                    console.log(res)
+                    if(res.data.code == 1){
+                        this.userInfo.sex = res.data.data.sex
+                        this.userInfo.username = res.data.data.username
+                        this.userInfo.hometown = res.data.data.hometown
+                        this.userInfo.address = res.data.data.address
+                        this.userInfo.nation = res.data.data.nation
+                        this.userInfo.wxNum = res.data.data.wxNum
+                        this.userInfo.qqNum = res.data.data.qqNum
+                        this.userInfo.education = res.data.data.education
+                        this.userInfo.jobRank = res.data.data.jobRank
+                        this.userInfo.salary = res.data.data.salary
+                        this.userInfo.joinPartyTime = res.data.data.joinPartyTime
+                        this.userInfo.lastPayTime = res.data.data.lastPayTime
+                        this.userInfo.partyStatus = res.data.data.partyStatus
+                        this.idCard = res.data.data.idCard
+                    }
+                })
+            },
+            handleSave () {
+                let obj = document.getElementsByName('sex')
+                for(var i=0; i<obj.length; i++){
+                    if(obj[i].checked){
+                        this.userInfo.sex = obj[i].value
+                    }
+                }
+                // console.log(this.userInfo)
+                this.$axios.post('/user/modifyInfo.do',this.userInfo).then(res => {
+                    // console.log(res)
+                    if(res.data.code == 1){
+                        this.$router.push('/personDetail')
+                        this.$toast('保存成功')
+                    }else{
+                        this.$toast('保存失败')
+                    }
+                })
+            }
+        },
+        created () {
+            this.getUserInfo()
         }
     }
 </script>

@@ -4,12 +4,12 @@
         <div class="h44"></div>
         <div>
             <div class="list">
-                <div class="item clearfix">
+                <div v-for="(item, index) in scoreData" :key="index" class="item clearfix">
                     <div class="item-left">
-                        <div class="item-name">互动发帖</div>
-                        <div class="item-time">2018-10-17 21:15:41</div>
+                        <div class="item-name">{{item.typeName}}</div>
+                        <div class="item-time">{{item.timeFormat}}</div>
                     </div>
-                    <div class="item-right">+0.1</div>
+                    <div class="item-right">+{{item.singleDesc}}</div>
                 </div>
             </div>
         </div>
@@ -22,6 +22,22 @@
         components:{
             Header
         },
+        data () {
+            return {
+                scoreData:[]
+            }
+        },
+        methods: {
+            getScoreData () {
+                this.$axios.get('/integral/integralList.do?page=1&rows=10').then(res => {
+                    console.log(res.data.rows)
+                    this.scoreData = res.data.rows
+                })
+            }
+        },
+        created () {
+            this.getScoreData()
+        }
     }
 </script>
 

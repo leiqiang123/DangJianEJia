@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 var instance = axios.create({
-    baseURL: 'http://211.67.177.56:8080',
+    baseURL: 'http://211.67.177.56:8080/hhdj',
     timeout:15000
 });
 const qs = require('querystring')

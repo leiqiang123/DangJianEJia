@@ -7,9 +7,9 @@
         <mt-spinner v-if="isLoading" class="loading" type="snake"></mt-spinner>
 
         <div v-else>
-            <div class="row" v-for="(item, index) in noticeData" :key="index">
+            <div @click="handleDetail(item.newsId)" class="row" v-for="(item, index) in noticeData" :key="index">
                 <div class="left-img">
-                    <img src="../../public/imgs/notice/drawable-hdpi/iconfont_gonggaotongzhi.png" alt="">
+                    <img :src="item.pic" alt="">
                 </div>
                 <div class="col">
                     <div class="notice-title">{{item.title}}</div>
@@ -60,17 +60,31 @@
         data () {
             return {
                 noticeData:[],
-                isLoading:false
+                isLoading:false,
+                config:{
+                    page:1,
+                    rows:10,
+                    type:2
+                }
             }
         },
         methods: {
             getData () {
                 this.isLoading = true
-                this.$axios.get('/hhdj/news/newsList.do?page=1&rows=10&type=2').then(res => {
-                    console.log(res.data.rows)
+                this.$axios.get('/news/newsList.do',this.config).then(res => {
+                    // console.log(res.data.rows)
                     this.noticeData = res.data.rows
                     this.isLoading = false
-                    console.log(this.noticeData)
+                    // console.log(this.noticeData)
+                })
+            },
+            handleDetail (id) {
+                this.$router.push({
+                    path:'/newsDetail',
+                    query:{
+                        title:'通知早知道',
+                        id,
+                    }
                 })
             }
         },
@@ -123,10 +137,7 @@
         }
     }
 }
-.loading{
-    position: fixed;
-    left: 50%;
-}
+
 .loading-content{
     text-align: center;
     .content-span{

@@ -88,6 +88,26 @@ const router = new Router({
       path:'/updatePersonDetail',
       name:'updatePersonDetail',
       component: () => import('../views/updatePersonDetail')
+    },
+    {
+      path:'/partyToday',
+      name:'partyToday',
+      component: () => import('../views/partyToday')
+    },
+    {
+      path:'/interactionReply',
+      name:'interactionReply',
+      component: () => import('../views/interactionReply')
+    },
+    {
+      path:'/findOrgMap',
+      name:'findOrgMap',
+      component: () => import('../views/findOrgMap')
+    },
+    {
+      path:'/anytimephoto',
+      name:'anytimephoto',
+      component: () => import('../views/anytimephoto')
     }
   ]
 })

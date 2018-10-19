@@ -13,7 +13,7 @@
             </mt-swipe>
             <div class="menu">
                 <div class="menu-row">
-                    <router-link to="/newseye">
+                    <router-link :to="{path:'/newseye',query:{typeId:0,title:'信工新闻眼'}}">
                         <div class="menu-cell">
                             <img src="../../public/imgs/index/drawable-hdpi/icon_01@2x.png" alt="">
                             <div>信工新闻眼</div>
@@ -33,18 +33,24 @@
                     </router-link>
                 </div>
                 <div class="menu-row">
-                    <div class="menu-cell">
-                        <img src="../../public/imgs/index/drawable-hdpi/icon_04@2x.png" alt="">
-                        <div>党建一点通</div>
-                    </div>
-                    <div class="menu-cell">
-                        <img src="../../public/imgs/index/drawable-hdpi/icon_06@2x.png" alt="">
-                        <div>党员亮身份</div>
-                    </div>
-                    <div class="menu-cell">
-                        <img src="../../public/imgs/index/drawable-hdpi/icon_02@2x.png" alt="">
-                        <div>党史上的今天</div>
-                    </div>
+                    <router-link :to="{path:'/newseye',query:{typeId:3,title:'党建一点通'}}">
+                        <div class="menu-cell">
+                            <img src="../../public/imgs/index/drawable-hdpi/icon_04@2x.png" alt="">
+                            <div>党建一点通</div>
+                        </div>
+                    </router-link>
+                    <router-link :to="{path:'/newseye',query:{typeId:5,title:'党员亮身份'}}">
+                        <div class="menu-cell">
+                            <img src="../../public/imgs/index/drawable-hdpi/icon_06@2x.png" alt="">
+                            <div>党员亮身份</div>
+                        </div>
+                    </router-link>
+                    <router-link to="/partyToday">
+                        <div class="menu-cell">
+                            <img src="../../public/imgs/index/drawable-hdpi/icon_02@2x.png" alt="">
+                            <div>党史上的今天</div>
+                        </div>
+                    </router-link>
                 </div>
             </div>
             <div class="banner">
@@ -53,12 +59,12 @@
             <div class="tese">
                 <div class="tese-cell"></div>
                 <div class="tese-cell">
-                    <div></div>
-                    <div></div>
+                    <div @click="jump1"></div>
+                    <div @click="jump2"></div>
                 </div>
                 <div class="tese-cell">
-                    <div></div>
-                    <div></div>
+                    <div @click="jump3"></div>
+                    <div @click="jump4"></div>
                 </div>
             </div>
             <div style="width:100%; height:49px;"></div>
@@ -103,9 +109,44 @@
         },
         methods: {
             getCarouselData () {
-                this.$axios.get('/hhdj/carousel/carouselList.do').then(res => {
+                this.$axios.get('/carousel/carouselList.do').then(res => {
                     // console.log(res.data)
                     this.rowsData = res.data.rows
+                })
+            },
+            jump1 () {
+                this.$router.push({
+                    path:'/newseye',
+                    query:{
+                        title:'随时随地学',
+                        typeId:6
+                    }
+                })
+            },
+            jump2 () {
+                this.$router.push({
+                    path:'/newseye',
+                    query:{
+                        title:'制度建设',
+                        typeId:4
+                    }
+                })
+            },
+            jump3 () {
+                this.$router.push({
+                    name:'anytimephoto',
+                    params:{
+                        title:'随时随地拍'
+                    }
+                })
+            },
+            jump4 () {
+                this.$router.push({
+                    path:'/newseye',
+                    query:{
+                        title:'特色活动',
+                        typeId:1
+                    }
                 })
             }
         },

@@ -5,7 +5,7 @@
         <div>
             <div class="score-img">
                 <img src="../../public/imgs/切图/jifen.png" alt="">
-                <span>64.4</span>
+                <span>{{this.$store.state.userData.totalScore}}</span>
             </div>
             <router-link to="/scoreDetail">
                 <div class="score-item">

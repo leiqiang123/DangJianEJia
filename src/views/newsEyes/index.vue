@@ -1,10 +1,11 @@
 <template>
     <div>
-        <Header>信工新闻眼</Header>
+        <Header>{{title}}</Header>
         <div class="h44"></div>
-        <div>
+        <mt-spinner v-if="isLoading" class="loading" type="snake"></mt-spinner>
+        <div v-else>
             <div class="news-item" v-for="(item, index) in newsListData" :key="index">
-                <router-link :to="{path:'/newsDetail', query:{id:item.newsId}}">
+                <router-link :to="{path:'/newsDetail', query:{id:item.newsId,title}}">
                     <div class="news-img">
                         <img :src="item.pic" alt="">
                     </div>
@@ -35,27 +36,34 @@
         data () {
             return {
                 newsListData:[],
+                title:'',
                 newsSettings:{
                     page:1,
                     rows:10,
                     type:0
-                }
+                },
+                isLoading:false
             }
         },
         methods: {
             getnewsData () {
-                this.$axios.get('/hhdj/news/newsList.do',this.newsSettings).then(res => {
+                this.isLoading = true
+                this.$axios.get('/news/newsList.do',this.newsSettings).then(res => {
                     // console.log(res.data.rows)
                     res.data.rows.map(item => {
                         if(item.title.length > 30){
-                            item.title = item.title.slice(0,31) + '...'
+                            item.title = item.title.slice(0,28) + '...'
                         }
                     })
                     this.newsListData = res.data.rows
+                    this.isLoading = false
                 })
             }
         },
         created () {
+            // console.log(this.$route.query)
+            this.title = this.$route.query.title
+            this.newsSettings.type = this.$route.query.typeId
             this.getnewsData()
         }
     }
