@@ -7,7 +7,8 @@
             <form action="">
                 <div class="item">
                     <span class="item-left">头像</span>
-                    <input class="item-right" type="text">
+                    <!-- <input class="item-right" type="text"> -->
+                    <Upload class="item-upload" v-on:change="change" :value="header"></Upload>
                 </div>
                 <div class="item">
                     <span class="item-left">姓名</span>
@@ -60,18 +61,15 @@
                 </div>
                 <div class="item">
                     <span class="item-left">入党时间</span>
-                    <!-- <input class="item-right" type="text" v-model="neirong"> -->
                     <mt-field class="item-time-select" v-model="userInfo.joinPartyTime" type="date"></mt-field>
                 </div>
                 <div class="item">
                     <span class="item-left">党费最后缴纳时间</span>
-                    <!-- <input class="item-right" type="text" v-model="neirong"> -->
                     <mt-field class="item-time-select" v-model="userInfo.lastPayTime" type="date"></mt-field>
                 </div>
                 <div class="item">
                     <span class="item-left">当前身份</span>
-                    <!-- <input class="item-right" type="text" v-model="neirong"> -->
-                    <select class="item-select" v-model="userInfo.partyStatus" name="" id="">
+                    <select class="item-select" v-model="userInfo.partyStatus">
                         <option value="0">党员</option>
                         <option value="1">预备党员</option>
                         <option value="2">积极份子</option>
@@ -84,9 +82,11 @@
 
 <script>
     import Header from '../../components/header'
+    import Upload from '../../components/upload'
     export default {
         components:{
-            Header
+            Header,
+            Upload
         },
         data () {
             return {
@@ -103,10 +103,11 @@
                     salary: '18000',
                     joinPartyTime: '1999-01-25',
                     lastPayTime: '2011-01-01',
-                    partyStatus: '1'
+                    partyStatus: '1',
                 },
                 isEdit:false,
-                idCard:0
+                idCard:'',
+                header:''
             }
         },
         methods: {
@@ -114,6 +115,7 @@
                 this.$axios.get('/user/userInfo.do').then(res => {
                     console.log(res)
                     if(res.data.code == 1){
+                        // this.userInfo = res.data.data
                         this.userInfo.sex = res.data.data.sex
                         this.userInfo.username = res.data.data.username
                         this.userInfo.hometown = res.data.data.hometown
@@ -128,6 +130,7 @@
                         this.userInfo.lastPayTime = res.data.data.lastPayTime
                         this.userInfo.partyStatus = res.data.data.partyStatus
                         this.idCard = res.data.data.idCard
+                        this.header = res.data.data.header
                     }
                 })
             },
@@ -148,6 +151,10 @@
                         this.$toast('保存失败')
                     }
                 })
+            },
+            change (e) {
+                console.log(e)
+                this.userInfo.header = e
             }
         },
         created () {
@@ -188,6 +195,14 @@
         position: absolute;
         right: 11px;
         font-size: 14px;
+    }
+    .item-upload{
+        position: absolute;
+        right: 11px;
+        top: 0;
+        font-size: 14px;
+        height: 0.98rem;
+        height: 48px;
     }
     input{  
 	background:none;  

@@ -7,8 +7,10 @@
             </div>
             <mt-swipe style="height:187.5px; margin-top: 44px;" :auto="3000">
                 <mt-swipe-item v-for="(item,index) in rowsData" :key="index">
-                    <img class="carousel-img" :src="item.imgUrl" alt="">
-                    <div class="carousel-bottom">{{item.title}}</div>
+                    <div @click="jumpSwipe(item.url,item.priority)">
+                        <img class="carousel-img" :src="item.imgUrl" alt="">
+                        <div class="carousel-bottom">{{item.title}}</div>
+                    </div>
                 </mt-swipe-item>
             </mt-swipe>
             <div class="menu">
@@ -146,6 +148,21 @@
                     query:{
                         title:'特色活动',
                         typeId:1
+                    }
+                })
+            },
+            jumpSwipe (id,priority) {
+                var title = ''
+                if(priority >= 5){
+                    title = '随时随地学'
+                }else{
+                    title = '信工新闻眼'
+                }
+                this.$router.push({
+                    path:'/newsDetail',
+                    query:{
+                        title,
+                        id
                     }
                 })
             }

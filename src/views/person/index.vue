@@ -50,6 +50,10 @@
         <div v-if="!isShow" style="padding:10px; margin-top:40px;">
             <mt-button type="danger" size="large" @click="handleLogout">退出登录</mt-button>
         </div>
+        <!-- <div>
+            <form action="" enctype="multipart/form-data"></form>
+            <input type="file" accept="image/jpeg,image/png,image/jpg" name="" id="" @change="up">
+        </div> -->
         
         <!-- 底部导航部分 -->
         <div class="footer">
@@ -144,6 +148,9 @@
                 }else{
                     this.$router.push('/login')
                 }
+            },
+            up ($event) {
+                console.log($event)
             }
         },
         created () {
