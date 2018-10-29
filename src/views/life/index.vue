@@ -20,7 +20,7 @@
                 <img src="../../public/imgs/切图/icon3.png" alt="">
                 <div>心得总结</div>
             </div>
-            <router-link to="">
+            <router-link to="/lifeChoice">
                 <div class="item">
                     <img src="../../public/imgs/切图/icon4.png" alt="">
                     <div>民主评议</div>

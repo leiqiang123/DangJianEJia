@@ -7,7 +7,7 @@
                 <img src="../../public/imgs/login/logo.png" alt="">
             </div>
         </div>
-        <form class="login-form">
+        <form class="login-form" onsubmit="return false;">
             <input class="form-input" type="text" v-model="userData.id_card" placeholder="身份证号">
             <input class="form-input" type="password" v-model="userData.password" placeholder="密码">
             <mt-button style="width:100%; font-size:14px;" type="danger" @click="handleLogin">登录</mt-button>
@@ -77,7 +77,7 @@
                         this.$toast('请输入身份证号')
                     }
                 })
-            }
+            },
         }
     }
 </script>

@@ -108,6 +108,16 @@ const router = new Router({
       path:'/anytimephoto',
       name:'anytimephoto',
       component: () => import('../views/anytimephoto')
+    },
+    {
+      path:'/lifeChoice',
+      name:'lifeChoice',
+      component: () => import('../views/lifeChoice')
+    },
+    {
+      path:'/personSummary',
+      name:'personSummary',
+      component: () => import('../views/personSummary')
     }
   ]
 })

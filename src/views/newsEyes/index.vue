@@ -4,7 +4,32 @@
         <div class="h44"></div>
         <mt-spinner v-if="isLoading" class="loading" type="snake"></mt-spinner>
         <div v-else>
-            <div class="news-item" v-for="(item, index) in newsListData" :key="index">
+            <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+                <ul>
+                    <li v-for="(item, index) in newsListData" :key="index">
+                        <div class="news-item">
+                            <router-link :to="{path:'/newsDetail', query:{id:item.newsId,title}}">
+                                <div class="news-img">
+                                    <img :src="item.pic" alt="">
+                                </div>
+                                <div class="news-content">
+                                    <h3>{{item.title}}</h3>
+                                    <div class="bottom-bar">
+                                        <span>
+                                            {{item.currentTime}}
+                                        </span>
+                                        <span class="icon">
+                                            <i class="icon-eye"></i>
+                                            {{item.count}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </router-link>
+                        </div>
+                    </li>
+                </ul>
+            </mt-loadmore>
+            <!-- <div class="news-item" v-for="(item, index) in newsListData" :key="index">
                 <router-link :to="{path:'/newsDetail', query:{id:item.newsId,title}}">
                     <div class="news-img">
                         <img :src="item.pic" alt="">
@@ -22,7 +47,7 @@
                         </div>
                     </div>
                 </router-link>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -42,7 +67,8 @@
                     rows:10,
                     type:0
                 },
-                isLoading:false
+                isLoading:false,
+                allLoaded:false
             }
         },
         methods: {
@@ -58,6 +84,17 @@
                     this.newsListData = res.data.rows
                     this.isLoading = false
                 })
+            },
+            loadTop () {
+                // console.log(1)
+                this.getnewsData()
+                this.$refs.loadmore.onTopLoaded();
+            },
+            loadBottom () {
+                console.log(2)
+                // 加载更多数据
+                // this.allLoaded = true;// 若数据已全部获取完毕
+                this.$refs.loadmore.onBottomLoaded();
             }
         },
         created () {

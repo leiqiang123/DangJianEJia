@@ -11,11 +11,12 @@ export default {
 </script>
 
 <style>
+
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* font-size: 12px; */
+  font-size: 12px;
 }
 .clearfix:after{
   content: '';
@@ -32,6 +33,7 @@ a{
 }
 ul{
   list-style: none;
+  font-size: 12px;
 }
 @font-face {
   font-family: 'iconfont';  /* project id 875443 */

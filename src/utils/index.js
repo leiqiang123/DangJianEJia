@@ -22,7 +22,6 @@ instance.interceptors.request.use(function (config) {
     return Promise.reject(error)
 })
 
-
 const xhr = {
     get(url, data, config) {
         return new Promise((resolve, reject) => {
